@@ -1,13 +1,19 @@
 package com.gumtree.addressbook
 
-import com.gumtree.addressbook.model.{Gender, Name}
+import com.gumtree.addressbook.implementation.DefaultAddressBookService
+import com.gumtree.addressbook.model.{DateOfBirth, Gender, Name}
+import com.gumtree.addressbook.repo.file.{CsvDataParser, FileSystemRepo}
+
+import scala.io.Source
 
 object Application {
-  private val addressBookService: AddressBookService = new AddressBookService {}
+  private val addressBookUrl = "https://raw.githubusercontent.com/gumtreeuk/address-book/master/AddressBook"
+  private val addressBookService: AddressBookService = new DefaultAddressBookService(new FileSystemRepo(new CsvDataParser(Source.fromURL(addressBookUrl))))
   private val olderPersonName = "Bill"
   private val youngerPersonName = "Paul"
 
   def main(args: Array[String]): Unit = {
+    println(DateOfBirth.from("03/05/35"))
     println(malesCountMessage)
     println(oldestPersonsMessage)
     println(daysDifferenceMessage)

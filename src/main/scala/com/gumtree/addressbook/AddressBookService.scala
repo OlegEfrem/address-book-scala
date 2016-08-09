@@ -4,10 +4,10 @@ import com.gumtree.addressbook.model.{Gender, Name, Person}
 
 trait AddressBookService {
 
-  def countBy(gender: Gender.Value): Int = -1
+  def countBy(gender: Gender.Value): Long
 
-  def oldestPerson(): Traversable[Person] = List()
+  def oldestPerson(): Traversable[Person]
 
-  def daysDifferenceBetween(olderPerson: Name, youngerPerson: Name) = -1
+  def daysDifferenceBetween(olderPerson: Name, youngerPerson: Name): Long
 
 }

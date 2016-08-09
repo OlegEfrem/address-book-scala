@@ -1,10 +1,14 @@
 package com.gumtree.addressbook
 
+import com.gumtree.addressbook.implementation.DefaultAddressBookService
 import com.gumtree.addressbook.model.{Gender, Name}
+import com.gumtree.addressbook.repo.file.{CsvDataParser, FileSystemRepo}
 import org.scalatest.{Matchers, WordSpec}
+import scala.io.Source
 
 class AddressBookServiceTest extends WordSpec with Matchers {
-  val addressBookService: AddressBookService = new AddressBookService {}
+  val fileName = "/AddressBook.csv"
+  val addressBookService: AddressBookService =  new DefaultAddressBookService(new FileSystemRepo(new CsvDataParser(Source.fromURL(getClass.getResource(fileName)))))
 
 
   "countBy(Gender.Male)" should {
