@@ -3,6 +3,11 @@ package com.gumtree.addressbook.repo.file
 import com.gumtree.addressbook.model.{Gender, Name, Person}
 import com.gumtree.addressbook.repo.AddressBookRepository
 
+/**
+  * Main trait for all repo implementations.
+  *
+  * @param dataParser contructor injected to allow for alternative parsers and unit testing this class in isolation (mocking the parser)
+  * */
 class FileSystemRepo(dataParser: DataParser) extends AddressBookRepository {
   /**
     * Stream is like a list except that its elements are computed lazily.

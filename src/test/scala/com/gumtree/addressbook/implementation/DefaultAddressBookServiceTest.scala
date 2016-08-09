@@ -40,7 +40,7 @@ class DefaultAddressBookServiceTest extends UnitSpec {
       when(addressBookRepository.findBy(ArgumentMatchers.any(classOf[Name]))).thenReturn(Stream())
       the[DataNotFoundException] thrownBy {
         defaultAddressBookService.daysDifferenceBetween(Name("name1"), Name("name2"))
-      } should have message """Not found person with the name: Name(name1,None)"""
+      } should have message """Not found person with the name: name1"""
     }
 
   }

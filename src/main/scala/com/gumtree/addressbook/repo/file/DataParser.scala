@@ -2,12 +2,13 @@ package com.gumtree.addressbook.repo.file
 
 import com.github.tototoshi.csv.CSVReader
 import com.gumtree.addressbook.model.{DateOfBirth, Gender, Name, Person}
-
 import scala.io.Source
 import scala.util.{Failure, Success, Try}
 
 trait DataParser {
-  def readPersons: Stream[Person]
+
+  val readPersons: Stream[Person]
+
 }
 
 class CsvDataParser(source: Source) extends DataParser {
@@ -18,7 +19,7 @@ class CsvDataParser(source: Source) extends DataParser {
   private val firstNameIndex = 0
   private val lastNameIndex = 1
 
-  override def readPersons: Stream[Person] =
+  override lazy val readPersons: Stream[Person] =
     CSVReader.open(source).toStream.map(mapRow)
 /**
   * This is another way of handling exceptions in Scala, only for sample purposes,

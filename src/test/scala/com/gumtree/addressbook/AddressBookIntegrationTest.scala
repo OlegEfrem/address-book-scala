@@ -4,7 +4,7 @@ import com.gumtree.addressbook.implementation.DefaultAddressBookService
 import com.gumtree.addressbook.model.{Gender, Name}
 import com.gumtree.addressbook.repo.file.{CsvDataParser, FileSystemRepo}
 
-class AddressBookServiceTest extends IntegrationSpec {
+class AddressBookIntegrationTest extends IntegrationSpec {
   val addressBookService: AddressBookService = new DefaultAddressBookService(new FileSystemRepo(new CsvDataParser(source)))
 
   "countBy(Gender.Male)" should {
