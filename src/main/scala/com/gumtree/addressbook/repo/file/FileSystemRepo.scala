@@ -1,6 +1,6 @@
 package com.gumtree.addressbook.repo.file
 
-import com.gumtree.addressbook.model.{Gender, Person}
+import com.gumtree.addressbook.model.{Gender, Name, Person}
 import com.gumtree.addressbook.repo.AddressBookRepository
 
 class FileSystemRepo(dataParser: DataParser) extends AddressBookRepository {
@@ -12,6 +12,14 @@ class FileSystemRepo(dataParser: DataParser) extends AddressBookRepository {
 
   override def findBy(gender: Gender.Value): Traversable[Person] = personStream.filter(_.gender == gender)
 
+  override def findBy(name: Name): Traversable[Person] = {
+    require(name.first != null && name.first.nonEmpty, s"First name must be non empty in $name")
+    name.last match {
+      case Some(lastName) => personStream.filter(_.name == name)
+      case None => personStream.filter(_.name.first == name.first)
+    }
+  }
+
   override def findOldestPersons: Traversable[Person] = minAgeInDays match {
     case -1 => Stream()
     case pos => personStream.filter(_.ageDays == pos)
@@ -21,4 +29,6 @@ class FileSystemRepo(dataParser: DataParser) extends AddressBookRepository {
     case l if l.nonEmpty => l.head
     case _ => -1
   }
+
+
 }
