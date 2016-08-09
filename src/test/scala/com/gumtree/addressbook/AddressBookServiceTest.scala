@@ -18,7 +18,7 @@ class AddressBookServiceTest extends IntegrationSpec {
   "oldestPerson" should {
 
     "return Wes Jackson" in {
-      addressBookService.oldestPerson.head.name shouldBe Name("Wes", Some("Jackson"))
+      addressBookService.oldestPerson().head.name shouldBe Name("Wes", Some("Jackson"))
     }
 
   }

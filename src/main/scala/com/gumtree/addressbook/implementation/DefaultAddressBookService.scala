@@ -8,8 +8,19 @@ class DefaultAddressBookService(repo: AddressBookRepository) extends AddressBook
 
   override def countBy(gender: Gender.Value): Long = repo.findBy(gender).size
 
-  override def oldestPerson(): Traversable[Person] = repo.findOldestPersons
+  override def oldestPerson(): Traversable[Person] = repo.findOldestPersons()
 
-  override def daysDifferenceBetween(olderPerson: Name, youngerPerson: Name): Long = -1
+  override def daysDifferenceBetween(olderPerson: Name, youngerPerson: Name): Long = {
+    val older = repo.findBy(olderPerson)
+    val younger = repo.findBy(youngerPerson)
+    headOrException(older, olderPerson).ageDays - headOrException(younger, youngerPerson).ageDays
+  }
+
+  private def headOrException(persons: Traversable[Person], name: Name): Person = {
+    persons.headOption match {
+      case Some(x) => x
+      case None => throw new DataNotFoundException(s"Not found person with the name: $name")
+    }
+  }
 
 }

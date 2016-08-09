@@ -6,7 +6,7 @@ trait AddressBookService {
 
   def countBy(gender: Gender.Value): Long
 
-  def oldestPerson: Traversable[Person]
+  def oldestPerson(): Traversable[Person]
 
   def daysDifferenceBetween(olderPerson: Name, youngerPerson: Name): Long
 

@@ -26,7 +26,7 @@ object Application {
   }
 
   private def oldestPersonsMessage: String = {
-    val personList = addressBookService.oldestPerson
+    val personList = addressBookService.oldestPerson()
     personList.toList match {
       case Nil => "There are no persons in the address book to find the oldest."
       case head :: Nil => s"The oldest person in the address book is ${head.name}, was born on ${head.dateOfBirth} and now is ${head.ageYears} years old."

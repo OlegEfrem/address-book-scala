@@ -11,9 +11,7 @@ trait TestData {
 
   def localFileSystemSource(resourceFileName: String = nonEmptyAddressBookFile) = Source.fromURL(getClass.getResource(resourceFileName)) //This will read from local filesystem: /src/test/resources
 
-  def newPerson(name: Name = newName) = Person(name, Gender.Male, DateOfBirth.from("28/11/83"))
-
-  def newPerson(minusDays: Long) = Person(newName, Gender.Male, DateOfBirth(LocalDate.now().minus(minusDays, ChronoUnit.DAYS)))
+  def newPerson(name: Name = newName, minusDays: Long = 0) = Person(name, Gender.Male, DateOfBirth(LocalDate.now().minus(minusDays, ChronoUnit.DAYS)))
 
   def newName = Name("FirstName", Some("LastName"))
 

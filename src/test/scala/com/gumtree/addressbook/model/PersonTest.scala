@@ -10,7 +10,7 @@ class PersonTest extends UnitSpec {
   "ageDays" should {
 
     "return 10000 for a person of this age in days" in {
-      val person = newPerson(10000)
+      val person = newPerson(minusDays = 10000)
       person.ageDays shouldBe 10000
     }
 

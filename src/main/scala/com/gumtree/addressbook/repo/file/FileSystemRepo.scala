@@ -20,7 +20,7 @@ class FileSystemRepo(dataParser: DataParser) extends AddressBookRepository {
     }
   }
 
-  override def findOldestPersons: Traversable[Person] = minAgeInDays match {
+  override def findOldestPersons(): Traversable[Person] = minAgeInDays match {
     case -1 => Stream()
     case pos => personStream.filter(_.ageDays == pos)
   }

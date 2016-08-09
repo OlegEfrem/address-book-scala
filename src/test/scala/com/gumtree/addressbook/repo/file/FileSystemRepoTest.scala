@@ -5,6 +5,7 @@ import com.gumtree.addressbook.model.{Gender, Name}
 import org.mockito.Mockito._
 
 class FileSystemRepoTest extends UnitSpec {
+
   val dataParser = mock[DataParser]
 
   def fileSystemRepo = new FileSystemRepo(dataParser)
@@ -84,8 +85,8 @@ class FileSystemRepoTest extends UnitSpec {
     }
 
     "return 2 persons if there are to multiple persons in the repo" in {
-      val expected = Stream(newPerson(1000), newPerson(1000))
-      val returnedStream = ((1 to 100).map(e => newPerson(e)) ++ Seq(newPerson(1000), newPerson(1000)) ++ (101 to 200).map(e => newPerson(e))).reverse.toStream
+      val expected = Stream(newPerson(minusDays = 1000), newPerson(minusDays = 1000))
+      val returnedStream = ((1 to 100).map(e => newPerson(minusDays = e)) ++ Seq(newPerson(minusDays = 1000), newPerson(minusDays = 1000)) ++ (101 to 200).map(e => newPerson(minusDays = e))).reverse.toStream
       when(dataParser.readPersons).thenReturn(returnedStream)
       fileSystemRepo.findOldestPersons shouldBe expected
     }
