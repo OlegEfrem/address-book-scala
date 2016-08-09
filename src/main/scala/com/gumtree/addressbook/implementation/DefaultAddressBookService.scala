@@ -8,7 +8,7 @@ class DefaultAddressBookService(repo: AddressBookRepository) extends AddressBook
 
   override def countBy(gender: Gender.Value): Long = repo.findBy(gender).size
 
-  override def oldestPerson(): Traversable[Person] = List()
+  override def oldestPerson(): Traversable[Person] = repo.findOldestPersons
 
   override def daysDifferenceBetween(olderPerson: Name, youngerPerson: Name): Long = -1
 

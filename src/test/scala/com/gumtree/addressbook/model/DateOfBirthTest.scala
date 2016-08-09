@@ -1,9 +1,8 @@
 package com.gumtree.addressbook.model
 
-import com.gumtree.addressbook.implementation.AddressBookException
-import org.scalatest.{Matchers, WordSpec}
+import com.gumtree.addressbook.{AddressBookException, UnitSpec}
 
-class DateOfBirthTest extends WordSpec with Matchers {
+class DateOfBirthTest extends UnitSpec {
 
   "toString/from" should {
 

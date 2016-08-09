@@ -3,13 +3,9 @@ package com.gumtree.addressbook
 import com.gumtree.addressbook.implementation.DefaultAddressBookService
 import com.gumtree.addressbook.model.{Gender, Name}
 import com.gumtree.addressbook.repo.file.{CsvDataParser, FileSystemRepo}
-import org.scalatest.{Matchers, WordSpec}
-import scala.io.Source
 
-class AddressBookServiceTest extends WordSpec with Matchers {
-  val fileName = "/AddressBook.csv"
-  val addressBookService: AddressBookService =  new DefaultAddressBookService(new FileSystemRepo(new CsvDataParser(Source.fromURL(getClass.getResource(fileName)))))
-
+class AddressBookServiceTest extends IntegrationSpec {
+  val addressBookService: AddressBookService = new DefaultAddressBookService(new FileSystemRepo(new CsvDataParser(source)))
 
   "countBy(Gender.Male)" should {
 
@@ -22,7 +18,7 @@ class AddressBookServiceTest extends WordSpec with Matchers {
   "oldestPerson" should {
 
     "return Wes Jackson" in {
-      addressBookService.oldestPerson().head.name shouldBe Name("Wes", Some("Jackson"))
+      addressBookService.oldestPerson.head.name shouldBe Name("Wes", Some("Jackson"))
     }
 
   }

@@ -1,4 +1,4 @@
-package com.gumtree.addressbook.implementation
+package com.gumtree.addressbook
 
 class AddressBookException(message: String, cause: Throwable) extends Exception(message, cause) {
   def this(message: String) = this(message, null)

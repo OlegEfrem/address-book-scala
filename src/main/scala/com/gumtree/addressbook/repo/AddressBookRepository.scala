@@ -4,4 +4,5 @@ import com.gumtree.addressbook.model.{Gender, Person}
 
 trait AddressBookRepository {
   def findBy(gender: Gender.Value): Traversable[Person]
+  def findOldestPersons: Traversable[Person]
 }

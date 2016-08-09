@@ -1,9 +1,8 @@
 package com.gumtree.addressbook
 
 import com.gumtree.addressbook.implementation.DefaultAddressBookService
-import com.gumtree.addressbook.model.{DateOfBirth, Gender, Name}
+import com.gumtree.addressbook.model.{Gender, Name}
 import com.gumtree.addressbook.repo.file.{CsvDataParser, FileSystemRepo}
-
 import scala.io.Source
 
 object Application {
@@ -13,7 +12,6 @@ object Application {
   private val youngerPersonName = "Paul"
 
   def main(args: Array[String]): Unit = {
-    println(DateOfBirth.from("03/05/35"))
     println(malesCountMessage)
     println(oldestPersonsMessage)
     println(daysDifferenceMessage)
@@ -28,7 +26,7 @@ object Application {
   }
 
   private def oldestPersonsMessage: String = {
-    val personList = addressBookService.oldestPerson()
+    val personList = addressBookService.oldestPerson
     personList.toList match {
       case Nil => "There are no persons in the address book to find the oldest."
       case head :: Nil => s"The oldest person in the address book is ${head.name}, was born on ${head.dateOfBirth} and now is ${head.ageYears} years old."
@@ -37,7 +35,7 @@ object Application {
   }
 
   private def daysDifferenceMessage: String = {
-    val daysDifference = addressBookService.daysDifferenceBetween(olderPerson = Name("Bill"), youngerPerson = Name("Paul"))
+    val daysDifference = addressBookService.daysDifferenceBetween(olderPerson = Name(olderPersonName), youngerPerson = Name(youngerPersonName))
     daysDifference match {
       case -1 => s"$noPersonsMessage to calculate how many days is $olderPersonName older than $youngerPersonName"
       case _ => s"$olderPersonName is older than $youngerPersonName with: $daysDifference days."

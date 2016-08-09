@@ -2,7 +2,8 @@ package com.gumtree.addressbook.model
 
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import com.gumtree.addressbook.implementation.AddressBookException
+
+import com.gumtree.addressbook.AddressBookException
 import org.joda.time.format.DateTimeFormat
 
 case class DateOfBirth(dateTime: LocalDate) {

@@ -2,15 +2,15 @@ package com.gumtree.addressbook.model
 
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
-import com.gumtree.addressbook.helpers.TestData
-import org.scalatest.{Matchers, WordSpec}
 
-class PersonTest extends WordSpec with Matchers with TestData {
+import com.gumtree.addressbook.UnitSpec
+
+class PersonTest extends UnitSpec {
 
   "ageDays" should {
 
     "return 10000 for a person of this age in days" in {
-      val person = Person(newName, Gender.Male, DateOfBirth(LocalDate.now().minus(10000, ChronoUnit.DAYS)))
+      val person = newPerson(10000)
       person.ageDays shouldBe 10000
     }
 
