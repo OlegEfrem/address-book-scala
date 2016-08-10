@@ -15,25 +15,22 @@ class FileSystemRepo(dataParser: DataParser) extends AddressBookRepository {
     * */
   private lazy val personStream: Stream[Person] = dataParser.readPersons
 
-  override def findBy(gender: Gender.Value): Traversable[Person] = personStream.filter(_.gender == gender)
+  override def findBy(gender: Gender.Value): Traversable[Person] = personStream.par.filter(_.gender == gender).toStream
 
   override def findBy(name: Name): Traversable[Person] = {
     require(name.first != null && name.first.nonEmpty, s"First name must be non empty in $name")
     name.last match {
-      case Some(lastName) => personStream.filter(_.name == name)
-      case None => personStream.filter(_.name.first == name.first)
+      case Some(lastName) => personStream.par.filter(_.name == name).toStream
+      case None => personStream.par.filter(_.name.first == name.first).toStream
     }
   }
 
-  override def findOldestPersons(): Traversable[Person] = minAgeInDays match {
+  override def findOldestPersons(): Traversable[Person] = maxAgeInDays match {
     case -1 => Stream()
-    case pos => personStream.filter(_.ageDays == pos)
+    case pos => personStream.par.filter(_.ageDays == pos).toStream
   }
 
-  private def minAgeInDays: Long = personStream.map(_.ageDays).sortWith( _ > _) match {
-    case l if l.nonEmpty => l.head
-    case _ => -1
-  }
+  private def maxAgeInDays: Long = if (personStream.isEmpty) -1 else personStream.par.map(_.ageDays).max
 
 
 }

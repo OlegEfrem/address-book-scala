@@ -6,7 +6,7 @@ import com.gumtree.addressbook.repo.AddressBookRepository
 
 class DefaultAddressBookService(repo: AddressBookRepository) extends AddressBookService {
 
-  override def countBy(gender: Gender.Value): Long = repo.findBy(gender).size
+  override def countBy(gender: Gender.Value): Long = repo.findBy(gender).par.size
 
   override def oldestPerson(): Traversable[Person] = repo.findOldestPersons()
 
