@@ -3,8 +3,10 @@ package com.gumtree.addressbook
 import com.gumtree.addressbook.implementation.DefaultAddressBookService
 import com.gumtree.addressbook.model.{Gender, Name}
 import com.gumtree.addressbook.repo.file.{CsvDataParser, FileSystemRepo}
+import scala.io.Source
 
-class IntegrationTest extends IntegrationSpec {
+class IntegrationTest extends BaseSpec {
+  val source: Source = localFileSystemSource()
   val addressBookService: AddressBookService = new DefaultAddressBookService(new FileSystemRepo(new CsvDataParser(source)))
 
   "countBy(Gender.Male)" should {

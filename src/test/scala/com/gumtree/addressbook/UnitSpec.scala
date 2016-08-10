@@ -1,5 +1,5 @@
 package com.gumtree.addressbook
 
-import org.scalatest.mock.MockitoSugar
+import org.scalatest.mockito.MockitoSugar
 
 trait UnitSpec extends BaseSpec with MockitoSugar

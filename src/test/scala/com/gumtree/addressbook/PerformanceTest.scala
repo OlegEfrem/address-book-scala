@@ -7,9 +7,10 @@ import org.scalatest.concurrent.TimeLimitedTests
 import org.scalatest.time.SpanSugar._
 
 class PerformanceTest extends BaseSpec with TimeLimitedTests {
-  val timeLimit = 60 seconds
+  val timeLimit = 5 seconds
   val timeout = timeLimit.millisPart / 1000
-  val numOfEntries = 10000000
+  val numOfEntries = 1000000
+  val printResult = false
   val dataParser = new DataParser {
     override lazy val readPersons: Stream[Person] = (1 to numOfEntries).map(e => newPerson(name = Name(s"FirstName$e"), minusDays = e)).toStream
   }
@@ -23,7 +24,7 @@ class PerformanceTest extends BaseSpec with TimeLimitedTests {
       addressBookService.countBy(Gender.Male) shouldBe numOfEntries
       val timeEnd = System.currentTimeMillis()
       val result = s"Count result on $numOfEntries entries: ${(timeEnd - timeStart).toDouble / 1000}"
-      println(result)
+      printResults(result)
     }
 
   }
@@ -35,7 +36,7 @@ class PerformanceTest extends BaseSpec with TimeLimitedTests {
       addressBookService.oldestPerson().head.name shouldBe Name(s"FirstName$numOfEntries")
       val timeEnd = System.currentTimeMillis()
       val result = s"Oldest person result on $numOfEntries entries: ${(timeEnd - timeStart).toDouble / 1000}"
-      println(result)
+      printResults(result)
     }
 
   }
@@ -47,8 +48,12 @@ class PerformanceTest extends BaseSpec with TimeLimitedTests {
       addressBookService.daysDifferenceBetween(olderPerson = Name(s"FirstName$numOfEntries"), youngerPerson = Name("FirstName1")) shouldBe numOfEntries - 1
       val timeEnd = System.currentTimeMillis()
       val result = s"Age difference result on $numOfEntries entries: ${(timeEnd - timeStart).toDouble / 1000}"
-      println(result)
+      printResults(result)
     }
 
+  }
+
+  private def printResults(result: String): Unit = {
+    if (printResult) println(result)
   }
 }
