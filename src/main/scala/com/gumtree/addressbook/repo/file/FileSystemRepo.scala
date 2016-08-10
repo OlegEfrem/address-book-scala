@@ -15,13 +15,13 @@ class FileSystemRepo(dataParser: DataParser) extends AddressBookRepository {
     * */
   private lazy val personStream: Stream[Person] = dataParser.readPersons
 
-  override def findBy(gender: Gender.Value): Traversable[Person] = personStream.par.filter(_.gender == gender).toStream
+  override def findBy(gender: Gender.Value): Traversable[Person] = personStream.filter(_.gender == gender)
 
   override def findBy(name: Name): Traversable[Person] = {
     require(name.first != null && name.first.nonEmpty, s"First name must be non empty in $name")
     name.last match {
-      case Some(lastName) => personStream.par.filter(_.name == name).toStream
-      case None => personStream.par.filter(_.name.first == name.first).toStream
+      case Some(lastName) => personStream.filter(_.name == name)
+      case None => personStream.filter(_.name.first == name.first)
     }
   }
 
