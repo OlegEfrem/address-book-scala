@@ -1,0 +1,31 @@
+Parallel collection:
+Count result on 1000000 entries: 2.612
+Oldest person result on 1000000 entries: 0.553
+Age difference result on 1000000 entries: 0.079
+Seq collection:
+Count result on 1000000 entries: 2.317
+Oldest person result on 1000000 entries: 0.983
+Age difference result on 1000000 entries: 0.029
+
+Par
+Count result on 5000000 entries: 9.985
+Oldest person result on 5000000 entries: 7.329
+Age difference result on 5000000 entries: 0.265
+Seq
+Count result on 5000000 entries: 9.436
+Oldest person result on 5000000 entries: 13.74
+Age difference result on 5000000 entries: 0.101
+
+Par
+Count result on 10000000 entries: 36.187
+Oldest person result on 10000000 entries: 8.96
+Age difference result on 10000000 entries: 0.493
+Seq
+Count result on 10000000 entries: 26.027
+Oldest person result on 10000000 entries: 45.573
+Age difference result on 10000000 entries: 0.164
+
+Optimized performance (Par for Oldest Person, Seq for Count and Age Difference):
+Count result on 10000000 entries: 20.749
+Oldest person result on 10000000 entries: 12.187
+Age difference result on 10000000 entries: 0.159
